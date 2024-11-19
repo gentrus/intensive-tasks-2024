@@ -28,9 +28,9 @@ package com.walking.intensive.chapter1.task4;
 public class Task4 {
     public static void main(String[] args) {
 
-        double a = -1;
+        double a = 0;
         double b = 3;
-        double c = 4;
+        double c = 0;
 
         System.out.println(solveEquation(a, b, c));
 
@@ -51,7 +51,10 @@ public class Task4 {
         if (a == 0 && c != 0) {
             return "Количество решений: 1. Корень: " + (int) (-c / b);
         }
-        if (a != 0 && b == 0) {
+        if (a == 0) {
+            return "Количество решений: 1. Корень: 0";
+        }
+        if (b == 0) {
             if (c / a < 0) {
                 return "Некорректные входные данные";
             } else {
@@ -61,7 +64,7 @@ public class Task4 {
                 return "Количество решений: 2. Корни: " + (int) (Math.sqrt(c)) + ";" + (int) (-Math.sqrt(c));
             }
         }
-        if (a != 0 && c == 0) {
+        if (c == 0) {
             return "Количество решений: 2. Корни: " + 0 + ";" + b / a;
         }
 
@@ -80,6 +83,6 @@ public class Task4 {
         }
 
 
-            return "Количество решений: 0.";
-        }
+        return "Количество решений: 0.";
     }
+}
