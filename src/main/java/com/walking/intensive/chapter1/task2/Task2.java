@@ -76,9 +76,8 @@ public class Task2 {
                     flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, " + "слева от лифта, " + "вправо";
             case 3 ->
                     flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, " + "справа от лифта, " + "влево";
-            case 4 ->
+            default ->
                     flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, " + "справа от лифта, " + "вправо";
-            default -> "";
         };
     }
 }
