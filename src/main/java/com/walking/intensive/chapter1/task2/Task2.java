@@ -34,7 +34,7 @@ package com.walking.intensive.chapter1.task2;
 public class Task2 {
     public static void main(String[] args) {
 
-        System.out.println(getFlatLocation(3, 2, 16));
+        System.out.println(getFlatLocation(9, 12, 162));
 
     }
 
@@ -52,9 +52,11 @@ public class Task2 {
 
         // номер подъезда
         int entranceNumber = flatNumber / flatOneEntrance;
-        if (flatNumber / maxFlatNumber < 1) {
+
+        if (flatNumber % flatOneEntrance != 0) {
             entranceNumber++;
         }
+
 
         // номер этажа без учета разделения на подъезды
         int commonFloorNumber = flatNumber / 4;
