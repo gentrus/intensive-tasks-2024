@@ -34,7 +34,7 @@ package com.walking.intensive.chapter1.task2;
 public class Task2 {
     public static void main(String[] args) {
 
-        System.out.println(getFlatLocation(9, 12, 162));
+        System.out.println(getFlatLocation(10, 2, 40));
 
     }
 
@@ -69,23 +69,16 @@ public class Task2 {
         // положение квартиры относительно этажа (1,2,3,4)
         int direction = flatNumber - (commonFloorNumber - 1) * 4;
 
-
-        String direction1 = "слева от лифта, ";
-        String direction3 = "влево";
-        String direction4 = "вправо";
-        String direction2 = "справа от лифта, ";
-
-        switch (direction) {
-            case 1:
-                return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, " + direction1 + direction3;
-            case 2:
-                return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, " + direction1 + direction4;
-            case 3:
-                return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, " + direction2 + direction3;
-            case 4:
-                return flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, " + direction2 + direction4;
-
-        }
-        return "";
+        return switch (direction) {
+            case 1 ->
+                    flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, " + "слева от лифта, " + "влево";
+            case 2 ->
+                    flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, " + "слева от лифта, " + "вправо";
+            case 3 ->
+                    flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, " + "справа от лифта, " + "влево";
+            case 4 ->
+                    flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, " + "справа от лифта, " + "вправо";
+            default -> "";
+        };
     }
 }
