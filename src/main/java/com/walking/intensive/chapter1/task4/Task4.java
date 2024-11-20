@@ -37,11 +37,8 @@ public class Task4 {
     }
 
     static String solveEquation(double a, double b, double c) {
-        if (a==0&&b==0&&c!=0) {
-            return "Количество решений 0";
-        }
-        if (a==0&&b!=0) {
-            return "Количество решений: 1. " + -c/b;
+        if (a==0&&b==0&&c==0) {
+            return "Бесконечное множество решений";
         }
 
         double discriminant= Math.pow(b,2) - (4 * a * c);
