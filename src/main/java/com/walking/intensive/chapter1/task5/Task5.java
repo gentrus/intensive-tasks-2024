@@ -23,7 +23,7 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getAreaByHeron(double a, double b, double c) {
-        if (a <= 0 || b <= 0 || c <= 0) {
+        if ((a <= 0 || b <= 0 || c <= 0) || ((a + b) <= c) || ((a + c) <= b) || ((b + c) <= a)) {
             return -1;
         }
         double halfPerimeter = (a + b + c) / 2;
@@ -44,7 +44,7 @@ public class Task5 {
         double middleHeight;
         double minHeight;
 
-        if (a <= 0 || b <= 0 || c <= 0) {
+        if ((a <= 0 || b <= 0 || c <= 0) || ((a + b) <= c) || ((a + c) <= b) || ((b + c) <= a)) {
             return height = new double[0];
         }
         height = new double[3];
@@ -82,7 +82,7 @@ public class Task5 {
         double middleMedian;
         double minMedian;
 
-        if (a <= 0 || b <= 0 || c <= 0) {
+        if ((a <= 0 || b <= 0 || c <= 0) || ((a + b) <= c) || ((a + c) <= b) || ((b + c) <= a)) {
             return medians = new double[0];
         }
         medians = new double[3];
@@ -121,15 +121,15 @@ public class Task5 {
         double middleBisector;
         double minBisector;
 
-        if (a <= 0 || b <= 0 || c <= 0) {
+        if ((a <= 0 || b <= 0 || c <= 0) || ((a + b) <= c) || ((a + c) <= b) || ((b + c) <= a)) {
             return bisectors = new double[0];
         }
         bisectors = new double[3];
 
         // находим высоты
-        double bisectors1 = (Math.sqrt(a*b* (a+b+c)* (a+b-c))) / (a+b);
-        double bisectors2 = (Math.sqrt(b*c* (b+c+a)* (b+c-a))) / (b+c);
-        double bisectors3 = (Math.sqrt(c*a* (c+a+b)* (c+a-b))) / (c+a);
+        double bisectors1 = (Math.sqrt(a * b * (a + b + c) * (a + b - c))) / (a + b);
+        double bisectors2 = (Math.sqrt(b * c * (b + c + a) * (b + c - a))) / (b + c);
+        double bisectors3 = (Math.sqrt(c * a * (c + a + b) * (c + a - b))) / (c + a);
 
         // распологаем по возрастанию
         maxBisector = Math.max(bisectors1, bisectors2);
@@ -153,9 +153,35 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getAngles(double a, double b, double c) {
-        //        Место для вашего кода
 
-        return null; // Заглушка. При реализации - удалить
+        double[] angles;
+        double maxAngle;
+        double middleAngle;
+        double minAngle;
+
+        if ((a <= 0 || b <= 0 || c <= 0) || ((a + b) <= c) || ((a + c) <= b) || ((b + c) <= a)) {
+            return angles = new double[0];
+        }
+        angles = new double[3];
+
+        // находим высоты
+        double angle1 = Math.toDegrees(Math.acos((Math.pow(a, 2) + Math.pow(b, 2) - Math.pow(c, 2)) / (2 * a * b)));
+        double angle2 = Math.toDegrees(Math.acos((Math.pow(c, 2) + Math.pow(a, 2) - Math.pow(b, 2)) / (2 * c * a)));
+        double angle3 = Math.toDegrees(Math.acos((Math.pow(b, 2) + Math.pow(c, 2) - Math.pow(a, 2)) / (2 * b * c)));
+
+        // распологаем по возрастанию
+        maxAngle = Math.max(angle1, angle2);
+        maxAngle = Math.max(maxAngle, angle3);
+
+        minAngle = Math.min(angle1, angle2);
+        minAngle = Math.min(minAngle, angle3);
+
+        middleAngle = (angle1 + angle2 + angle3) - (maxAngle + minAngle);
+
+
+        return angles = new double[]{minAngle, middleAngle, maxAngle};
+
+
     }
 
     /**
@@ -166,9 +192,11 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getInscribedCircleRadius(double a, double b, double c) {
-        //        Место для вашего кода
+        if ((a <= 0 || b <= 0 || c <= 0) || ((a + b) <= c) || ((a + c) <= b) || ((b + c) <= a)) {
+            return -1;
+        }
 
-        return 0; // Заглушка. При реализации - удалить
+        return getAreaByHeron(a, b, c) / ((a + b + c) / 2);
     }
 
     /**
@@ -179,9 +207,10 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getCircumradius(double a, double b, double c) {
-        //        Место для вашего кода
-
-        return 0; // Заглушка. При реализации - удалить
+        if ((a <= 0 || b <= 0 || c <= 0) || ((a + b) <= c) || ((a + c) <= b) || ((b + c) <= a)) {
+            return -1;
+        }
+        return (a * b * c) / (4 * getAreaByHeron(a, b, c));
     }
 
     /**
