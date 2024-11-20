@@ -22,13 +22,16 @@ public class Task5 {
      *
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
+    // Метод проверки введенных данных
+    static boolean isValidTriangle(double a, double b, double c) {
+        return (a <= 0 || b <= 0 || c <= 0) || ((a + b) <= c) || ((a + c) <= b) || ((b + c) <= a);
+    }
+
     static double getAreaByHeron(double a, double b, double c) {
-        if ((a <= 0 || b <= 0 || c <= 0) || ((a + b) <= c) || ((a + c) <= b) || ((b + c) <= a)) {
+        if (isValidTriangle(a, b, c)) {
             return -1;
         }
-        double halfPerimeter = (a + b + c) / 2;
-        return Math.sqrt(halfPerimeter * (halfPerimeter - a) * (halfPerimeter - b) * (halfPerimeter - c));
-
+        return Math.sqrt(((a + b + c) / 2) * (((a + b + c) / 2)- a) * (((a + b + c) / 2) - b) * (((a + b + c) / 2) - c));
     }
 
     /**
@@ -39,15 +42,10 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getHeights(double a, double b, double c) {
-        double[] height;
-        double maxHeight;
-        double middleHeight;
-        double minHeight;
 
-        if ((a <= 0 || b <= 0 || c <= 0) || ((a + b) <= c) || ((a + c) <= b) || ((b + c) <= a)) {
-            return height = new double[0];
+        if (isValidTriangle(a, b, c)) {
+            return new double[0];
         }
-        height = new double[3];
 
         // находим высоты
         double height1 = (2 * getAreaByHeron(a, b, c)) / a;
@@ -55,17 +53,15 @@ public class Task5 {
         double height3 = (2 * getAreaByHeron(a, b, c)) / c;
 
         // распологаем по возрастанию
-        maxHeight = Math.max(height1, height2);
+        double maxHeight = Math.max(height1, height2);
         maxHeight = Math.max(maxHeight, height3);
 
-        minHeight = Math.min(height1, height2);
+        double minHeight = Math.min(height1, height2);
         minHeight = Math.min(minHeight, height3);
 
-        middleHeight = (height1 + height2 + height3) - (maxHeight + minHeight);
+        double middleHeight = (height1 + height2 + height3) - (maxHeight + minHeight);
 
-
-        return height = new double[]{minHeight, middleHeight, maxHeight};
-
+        return new double[]{minHeight, middleHeight, maxHeight};
     }
 
     /**
@@ -77,15 +73,9 @@ public class Task5 {
      */
     static double[] getMedians(double a, double b, double c) {
 
-        double[] medians;
-        double maxMedian;
-        double middleMedian;
-        double minMedian;
-
-        if ((a <= 0 || b <= 0 || c <= 0) || ((a + b) <= c) || ((a + c) <= b) || ((b + c) <= a)) {
-            return medians = new double[0];
+        if (isValidTriangle(a, b, c)) {
+            return new double[0];
         }
-        medians = new double[3];
 
         // находим высоты
         double median1 = (Math.sqrt(2 * Math.pow(c, 2) + 2 * Math.pow(b, 2) - Math.pow(a, 2))) / 2;
@@ -93,19 +83,16 @@ public class Task5 {
         double median3 = (Math.sqrt(2 * Math.pow(a, 2) + 2 * Math.pow(b, 2) - Math.pow(c, 2))) / 2;
 
         // распологаем по возрастанию
-        maxMedian = Math.max(median1, median2);
+        double maxMedian = Math.max(median1, median2);
         maxMedian = Math.max(maxMedian, median3);
 
-        minMedian = Math.min(median1, median2);
+        double minMedian = Math.min(median1, median2);
         minMedian = Math.min(minMedian, median3);
 
-        middleMedian = (median1 + median2 + median3) - (maxMedian + minMedian);
+        double middleMedian = (median1 + median2 + median3) - (maxMedian + minMedian);
 
-
-        return medians = new double[]{minMedian, middleMedian, maxMedian};
-
+        return new double[]{minMedian, middleMedian, maxMedian};
     }
-
 
     /**
      * Реализуйте метод, который будет возвращать биссектрисы треугольника по возрастанию.
@@ -116,15 +103,9 @@ public class Task5 {
      */
     static double[] getBisectors(double a, double b, double c) {
 
-        double[] bisectors;
-        double maxBisector;
-        double middleBisector;
-        double minBisector;
-
-        if ((a <= 0 || b <= 0 || c <= 0) || ((a + b) <= c) || ((a + c) <= b) || ((b + c) <= a)) {
-            return bisectors = new double[0];
+        if (isValidTriangle(a, b, c)) {
+            return new double[0];
         }
-        bisectors = new double[3];
 
         // находим высоты
         double bisectors1 = (Math.sqrt(a * b * (a + b + c) * (a + b - c))) / (a + b);
@@ -132,16 +113,16 @@ public class Task5 {
         double bisectors3 = (Math.sqrt(c * a * (c + a + b) * (c + a - b))) / (c + a);
 
         // распологаем по возрастанию
-        maxBisector = Math.max(bisectors1, bisectors2);
+        double maxBisector = Math.max(bisectors1, bisectors2);
         maxBisector = Math.max(maxBisector, bisectors3);
 
-        minBisector = Math.min(bisectors1, bisectors2);
+        double minBisector = Math.min(bisectors1, bisectors2);
         minBisector = Math.min(minBisector, bisectors3);
 
-        middleBisector = (bisectors1 + bisectors2 + bisectors3) - (maxBisector + minBisector);
+        double middleBisector = (bisectors1 + bisectors2 + bisectors3) - (maxBisector + minBisector);
 
 
-        return bisectors = new double[]{minBisector, middleBisector, maxBisector};
+        return new double[]{minBisector, middleBisector, maxBisector};
 
     }
 
@@ -154,15 +135,9 @@ public class Task5 {
      */
     static double[] getAngles(double a, double b, double c) {
 
-        double[] angles;
-        double maxAngle;
-        double middleAngle;
-        double minAngle;
-
-        if ((a <= 0 || b <= 0 || c <= 0) || ((a + b) <= c) || ((a + c) <= b) || ((b + c) <= a)) {
-            return angles = new double[0];
+        if (isValidTriangle(a, b, c)) {
+            return new double[0];
         }
-        angles = new double[3];
 
         // находим высоты
         double angle1 = Math.toDegrees(Math.acos((Math.pow(a, 2) + Math.pow(b, 2) - Math.pow(c, 2)) / (2 * a * b)));
@@ -170,16 +145,16 @@ public class Task5 {
         double angle3 = Math.toDegrees(Math.acos((Math.pow(b, 2) + Math.pow(c, 2) - Math.pow(a, 2)) / (2 * b * c)));
 
         // распологаем по возрастанию
-        maxAngle = Math.max(angle1, angle2);
+        double maxAngle = Math.max(angle1, angle2);
         maxAngle = Math.max(maxAngle, angle3);
 
-        minAngle = Math.min(angle1, angle2);
+        double minAngle = Math.min(angle1, angle2);
         minAngle = Math.min(minAngle, angle3);
 
-        middleAngle = (angle1 + angle2 + angle3) - (maxAngle + minAngle);
+        double middleAngle = (angle1 + angle2 + angle3) - (maxAngle + minAngle);
 
 
-        return angles = new double[]{minAngle, middleAngle, maxAngle};
+        return new double[]{minAngle, middleAngle, maxAngle};
 
 
     }
@@ -192,7 +167,7 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getInscribedCircleRadius(double a, double b, double c) {
-        if ((a <= 0 || b <= 0 || c <= 0) || ((a + b) <= c) || ((a + c) <= b) || ((b + c) <= a)) {
+        if (isValidTriangle(a, b, c)) {
             return -1;
         }
 
@@ -207,7 +182,7 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getCircumradius(double a, double b, double c) {
-        if ((a <= 0 || b <= 0 || c <= 0) || ((a + b) <= c) || ((a + c) <= b) || ((b + c) <= a)) {
+        if (isValidTriangle(a, b, c)) {
             return -1;
         }
         return (a * b * c) / (4 * getAreaByHeron(a, b, c));
