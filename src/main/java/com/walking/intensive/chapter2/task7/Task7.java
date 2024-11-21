@@ -27,28 +27,32 @@ package com.walking.intensive.chapter2.task7;
  */
 public class Task7 {
     public static void main(String[] args) {
-        System.out.println(getFriendlyPair(200));
+
     }
 
     static int getFriendlyPair(int n) {
+        if (n < 1 || n > 1000000) {
+            return -1;
+        }
 
-        for (;n>0; n--) {
-            int summDividers=0;
-            int summDividers2=0;
+        for (; n > 0; n--) {
+            int summDividers = 0;
+            int summDividers2 = 0;
 
-            for (int i=1; i<=n/2;i++) {
-                if (n % i == 0) {
+            for (int i = 1; i <= n / 2; i++) {
+                if (n % i == 0 && summDividers + i != n) {
                     summDividers += i;
                 }
             }
 
-            for (int k = 1; k<=summDividers/2 ; k++) {
-                if (summDividers%k==0) {
-                    summDividers2+=k;
+            for (int k = 1; k <= summDividers / 2; k++) {
+                if (summDividers % k == 0) {
+                    summDividers2 += k;
                 }
             }
-            if (n==summDividers2) {
-               return n;
+            if (n == summDividers2) {
+
+                return n;
             }
         }
         return 0;
