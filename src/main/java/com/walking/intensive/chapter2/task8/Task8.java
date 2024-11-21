@@ -1,5 +1,8 @@
 package com.walking.intensive.chapter2.task8;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+import java.sql.SQLOutput;
+
 /**
  * Добираясь в школу на трамвае Вова проверяет, является ли купленный билет счастливым.
  * Если является, то нужно загадать желание и съесть билетик.
@@ -20,11 +23,20 @@ package com.walking.intensive.chapter2.task8;
  */
 public class Task8 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
     }
 
     static double getHappyTicketChance() {
-        // Ваш код
-        return 0.0;
+        int numberHappyTickets = 0;
+        for (int i = 1001; i < 1000000; i++) {
+            if (getSumNumbs(i) == getSumNumbs(i / 1000)) {
+                numberHappyTickets++;
+            }
+        }
+        return (double) numberHappyTickets / 999999;
+    }
+
+    static int getSumNumbs(int n) {
+        return (n % 1000 - n % 100) / 100 + (n % 100 - n % 10) / 10 + n % 10;
     }
 }
