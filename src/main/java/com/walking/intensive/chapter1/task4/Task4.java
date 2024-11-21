@@ -51,14 +51,14 @@ public class Task4 {
         // Дискриминант
         double discriminant = Math.pow(b, 2) - (4 * a * c);
         if (discriminant == 0) {
-            if ((-b / (2 * a))==0) {
+            if ((-b / (2 * a)) == 0) {
                 return "Количество решений: 1. Корень: " + 0;
             }
             return "Количество решений: 1. Корень: " + (-b / (2 * a));
         }
         if (discriminant > 0) {
-            double sqrt1=((-b + Math.sqrt(discriminant)) / (2 * a));
-            double sqrt2=((-b - Math.sqrt(discriminant)) / (2 * a));
+            double sqrt1 = ((-b + Math.sqrt(discriminant)) / (2 * a));
+            double sqrt2 = ((-b - Math.sqrt(discriminant)) / (2 * a));
             if (sqrt1 > sqrt2) {
                 return "Количество решений: 2. Корни: " + sqrt1 + ";" + sqrt2;
             }
