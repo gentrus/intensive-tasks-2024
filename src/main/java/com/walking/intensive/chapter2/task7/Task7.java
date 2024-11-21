@@ -35,26 +35,25 @@ public class Task7 {
             return -1;
         }
 
-        for (; n > 0; n--) {
+        for (int candidate = n; candidate > 0; candidate--) {
             int summDividers = 0;
             int summDividers2 = 0;
 
-            for (int i = 1; i <= n / 2; i++) {
-                if (n % i == 0 && summDividers + i != n) {
+            for (int i = 1; i <= candidate / 2; i++) {
+                if (candidate % i == 0 && summDividers + i != candidate) {
                     summDividers += i;
                 }
             }
-
             for (int k = 1; k <= summDividers / 2; k++) {
                 if (summDividers % k == 0) {
                     summDividers2 += k;
                 }
             }
-            if (n == summDividers2) {
-
-                return n;
+            if (candidate == summDividers2) {
+                return candidate;
             }
         }
+
         return 0;
     }
 }
