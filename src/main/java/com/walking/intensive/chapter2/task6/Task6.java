@@ -8,7 +8,7 @@ package com.walking.intensive.chapter2.task6;
  */
 public class Task6 {
     public static void main(String[] args) {
-        System.out.println(getGcdByEuclideanAlgorithm(270, 192));
+
     }
 
     /**
@@ -25,23 +25,19 @@ public class Task6 {
         }
         if (n >= m) {
             int plus = n;
-            for (; ; ) {
-                if (n % m == 0) {
-                    return n;
-                }
+
+            while (n % m != 0) {
                 n += plus;
             }
+            return n;
         }
 
         int plus = m;
-        for (; ; ) {
-            if (m % n == 0) {
-                return m;
-            }
+        while (m % n != 0) {
             m += plus;
         }
+        return m;
     }
-
 
     /**
      * Реализуйте метод, который будет возвращать НОД для чисел, переданных параметрами.
@@ -58,20 +54,15 @@ public class Task6 {
         // Находим наибольший делитель для меньшего из параметров (если первый параметр меньше второго)
         if (m <= n) {
             for (int i = m; i > 0; i--) {
-                if (m % i == 0) {
-                    // Пробуем разделить больший из параметров на делитель
-                    if (n % i == 0) {
-                        return i;
-                    }
+
+                if (m % i == 0 && n % i == 0) {
+                    return i;
                 }
             }
         }
-        // Если первый параметр больше второго
         for (int i = n; i > 0; i--) {
-            if (n % i == 0) {
-                if (m % i == 0) {
-                    return i;
-                }
+            if (n % i == 0 && m % i == 0) {
+                return i;
             }
         }
         return 0;
@@ -91,23 +82,17 @@ public class Task6 {
             return -1;
         }
 
-        for (; ; ) {
+        while (m != 0) {
             if (m >= n) {
-                int minus = n;
-                m -= minus;
+                m -= n;
             } else {
-                int minus = m;
-                n -= minus;
-            }
-            if (n == 0) {
-                return m;
-            }
-            if (m == 0) {
-                return n;
+                n -= m;
             }
         }
+        return n;
     }
 }
+
 
 
 
