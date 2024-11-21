@@ -47,18 +47,6 @@ public class Task4 {
         if (a == 0) {
             return "Количество решений: 1. Корень: " + (-c / b);
         }
-        if (b == 0 && c != 0) {
-            if (c / a < 0) {
-                return "Некорректные входные данные";
-            }
-            if (c == a) {
-                return "Количество решений: 0.";
-            }
-            return "Количество решений: 2. Корни: " + (Math.sqrt(c)) + ";" + (-Math.sqrt(c));
-        }
-        if (c == 0 && b != 0) {
-            return "Количество решений: 2. Корни: " + 0 + ";" + b / a;
-        }
 
         // Дискриминант
         double discriminant = Math.pow(b, 2) - (4 * a * c);
@@ -69,10 +57,12 @@ public class Task4 {
             return "Количество решений: 1. Корень: " + (-b / (2 * a));
         }
         if (discriminant > 0) {
-            if (((-b + Math.sqrt(discriminant)) / (2 * a)) > ((-b - Math.sqrt(discriminant)) / (2 * a))) {
-                return "Количество решений: 2. Корни: " + ((-b + Math.sqrt(discriminant)) / (2 * a)) + ";" + ((-b - Math.sqrt(discriminant)) / (2 * a));
+            double sqrt1=((-b + Math.sqrt(discriminant)) / (2 * a));
+            double sqrt2=((-b - Math.sqrt(discriminant)) / (2 * a));
+            if (sqrt1 > sqrt2) {
+                return "Количество решений: 2. Корни: " + sqrt1 + ";" + sqrt2;
             }
-            return "Количество решений: 2. Корни: " + ((-b - Math.sqrt(discriminant)) / (2 * a)) + ";" + ((-b + Math.sqrt(discriminant)) / (2 * a));
+            return "Количество решений: 2. Корни: " + sqrt2 + ";" + sqrt1;
         }
 
         return "Количество решений: 0.";
