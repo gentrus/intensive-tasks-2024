@@ -40,7 +40,6 @@ public class Task4 {
         if (a == 0 && b == 0 && c == 0) {
             return "Бесконечное множество решений";
         }
-
         if (a == 0 && b == 0) {
             return "Некорректные входные данные";
         }
@@ -59,10 +58,7 @@ public class Task4 {
         if (discriminant > 0) {
             double sqrt1 = ((-b + Math.sqrt(discriminant)) / (2 * a));
             double sqrt2 = ((-b - Math.sqrt(discriminant)) / (2 * a));
-            if (sqrt1 > sqrt2) {
-                return "Количество решений: 2. Корни: " + sqrt1 + ";" + sqrt2;
-            }
-            return "Количество решений: 2. Корни: " + sqrt2 + ";" + sqrt1;
+            return "Количество решений: 2. Корни: " + Math.min(sqrt1, sqrt2) + ";" + Math.max(sqrt1, sqrt2);
         }
 
         return "Количество решений: 0.";
