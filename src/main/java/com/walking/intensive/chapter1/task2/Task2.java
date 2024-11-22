@@ -34,15 +34,11 @@ package com.walking.intensive.chapter1.task2;
 public class Task2 {
     public static void main(String[] args) {
 
-        System.out.println(getFlatLocation(10, 2, 40));
-
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
-
         int maxFlatNumber = floorAmount * entranceAmount * 4;
         int flatOneEntrance = floorAmount * 4;
-
         if (flatNumber <= 0 || floorAmount <= 0 || entranceAmount <= 0) {
             return "Некорректные входные данные";
         }
@@ -56,28 +52,29 @@ public class Task2 {
         if (flatNumber % flatOneEntrance != 0) {
             entranceNumber++;
         }
-
-
         // номер этажа без учета разделения на подъезды
         int commonFloorNumber = flatNumber / 4;
         if (flatNumber % 4 != 0) {
             commonFloorNumber++;
         }
-
         // номер этажа с учетом разделения на подъезды
         int floorNumber = commonFloorNumber - floorAmount * (entranceNumber - 1);
         // положение квартиры относительно этажа (1,2,3,4)
         int direction = flatNumber - (commonFloorNumber - 1) * 4;
 
+        String rightLift="справа от лифта, ";
+        String leftLift="слева от лифта, ";
+        String left="влево";
+        String right="вправо";
         return switch (direction) {
             case 1 ->
-                    flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, " + "слева от лифта, " + "влево";
+                    flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, " + leftLift + left;
             case 2 ->
-                    flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, " + "слева от лифта, " + "вправо";
+                    flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, " + leftLift + right;
             case 3 ->
-                    flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, " + "справа от лифта, " + "влево";
+                    flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, " + rightLift + left;
             default ->
-                    flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, " + "справа от лифта, " + "вправо";
+                    flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, " + rightLift + right;
         };
     }
 }
