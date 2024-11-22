@@ -62,19 +62,13 @@ public class Task2 {
         // положение квартиры относительно этажа (1,2,3,4)
         int direction = flatNumber - (commonFloorNumber - 1) * 4;
 
-        String rightLift="справа от лифта, ";
-        String leftLift="слева от лифта, ";
-        String left="влево";
-        String right="вправо";
+        String flatEntranceFloor = flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, ";
         return switch (direction) {
-            case 1 ->
-                    flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, " + leftLift + left;
-            case 2 ->
-                    flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, " + leftLift + right;
-            case 3 ->
-                    flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, " + rightLift + left;
-            default ->
-                    flatNumber + " кв - " + entranceNumber + " подъезд, " + floorNumber + " этаж, " + rightLift + right;
+            case 1 -> flatEntranceFloor + "слева от лифта, " + "влево";
+            case 2 -> flatEntranceFloor + "слева от лифта, " + "вправо";
+            case 3 -> flatEntranceFloor + "справа от лифта, " + "влево";
+            case 4 -> flatEntranceFloor + "справа от лифта, " + "вправо";
+            default -> "Некорректные входные данные";
         };
     }
 }
