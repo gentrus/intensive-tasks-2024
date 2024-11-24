@@ -51,32 +51,44 @@ package com.walking.intensive.chapter2.task9;
  */
 public class Task9 {
     public static void main(String[] args) {
-        getPascalTriangle(6);
+        getPascalTriangle(18);
     }
 
     static String getPascalTriangle(int n) {
         if (n < 1) {
             return null;
         }
-
-        for (int lineNumb = n; lineNumb > 0; lineNumb--) {
+        // Цикл вывода строк
+        for (int lineNumb = 0; lineNumb < n; lineNumb++) {
 
             // Пробелы перед числами
-            for (int spaceNumb = 1; spaceNumb <= lineNumb; spaceNumb++) {
+            for (int spaceNumb = 0; spaceNumb < n - 1 - lineNumb; spaceNumb++) {
                 System.out.print(" ");
             }
-            System.out.print(1+" ");
-            for (int i = 0; i < n-1-lineNumb; i++) {
-                System.out.print(n-lineNumb+" ");
-            }
-            if (lineNumb==n) {
-                System.out.println();
-            }
-            else {
+            if (lineNumb == 0) {
                 System.out.println(1);
+                continue;
             }
+//            System.out.print(1 + " ");
+            for (int i = 0; i < lineNumb; i++) {
+                int numb = getFactorial(lineNumb) / (getFactorial(i) * (getFactorial(lineNumb - i)));
+                System.out.print(numb + " ");
+            }
+            // Единица в конце для остальных строк
+            System.out.println(1);
         }
 
         return null;
     }
+
+    static int getFactorial(int n) {
+        if (n == 0) {
+            return 1;
+        }
+        if (n == 1) {
+            return 1;
+        }
+        return n * getFactorial(n - 1);
+    }
 }
+
