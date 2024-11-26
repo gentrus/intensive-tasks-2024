@@ -51,26 +51,45 @@ package com.walking.intensive.chapter2.task9;
  */
 public class Task9 {
     public static void main(String[] args) {
-
+        System.out.println(getPascalTriangle(10));
     }
 
     static String getPascalTriangle(int n) {
         if (n < 1) {
-            return null;
+            return "";
+        }
+
+        String result = "";
+        String lastLine = "";
+        String line;
+        for (int i = 0; i <= n - 1; i++) {
+            long numb = getFactorial(n - 1) / (getFactorial(i) * (getFactorial(n - 1 - i)));
+            if (i == 0) {
+                lastLine += numb;
+            } else {
+                lastLine += " " + numb;
+            }
         }
 
         for (int lineNumb = 0; lineNumb < n; lineNumb++) {
-            for (int spaceNumb = 0; spaceNumb < n - 1 - lineNumb; spaceNumb++) {
-                System.out.print(" ");
-            }
+//            for (int spaceNumb = 0; spaceNumb < n - 1 - lineNumb; spaceNumb++) {
+//                result += " ";
+//            }
+
+            line = "";
             for (int i = 0; i <= lineNumb; i++) {
                 long numb = getFactorial(lineNumb) / (getFactorial(i) * (getFactorial(lineNumb - i)));
-                System.out.print(numb + " ");
+                if (i == 0) {
+                    line += numb;
+                } else {
+                    line += " " + numb;
+                }
             }
-            System.out.println();
+            result += String.format("%" + ((lastLine.length() / 2 + lastLine.length() % 2 + line.length() % 2 + line.length() / 2) - 1) + "s", line);
+            result += "\n";
         }
 
-        return "";
+        return result;
     }
 
     static long getFactorial(long n) {
