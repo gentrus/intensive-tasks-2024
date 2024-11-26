@@ -15,12 +15,12 @@ public class Task10 {
     }
 
     static boolean isPalindrome(String inputString) {
-        if (inputString==null||inputString.length()<2) {
+        if (inputString == null || inputString.length() < 2) {
             return false;
         }
 
         int letterNumb2 = inputString.length() - 1;
-        for (int letterNumb1 = 0; letterNumb1 < inputString.length() / 2; ) {
+        for (int letterNumb1 = 0; letterNumb1 < inputString.length() / 2;) {
             char letter1 = inputString.charAt(letterNumb1);
             while (letter1 == ' ' || letter1 == '?' || letter1 == '!' || letter1 == ',' || letter1 == '-') {
                 letterNumb1++;
