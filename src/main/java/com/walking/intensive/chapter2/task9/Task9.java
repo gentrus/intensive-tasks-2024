@@ -51,7 +51,7 @@ package com.walking.intensive.chapter2.task9;
  */
 public class Task9 {
     public static void main(String[] args) {
-        System.out.println(getPascalTriangle(3));
+
     }
 
     static String getPascalTriangle(int n) {
@@ -59,9 +59,7 @@ public class Task9 {
             return "";
         }
 
-        String result = "";
         String lastLine = "";
-        String line;
         for (int i = 0; i <= n - 1; i++) {
             long numb = getFactorial(n - 1) / (getFactorial(i) * (getFactorial(n - 1 - i)));
             if (i == 0) {
@@ -71,6 +69,8 @@ public class Task9 {
             }
         }
 
+        String line;
+        String result = "";
         for (int lineNumb = 0; lineNumb < n; lineNumb++) {
             line = "";
             for (int i = 0; i <= lineNumb; i++) {
@@ -81,8 +81,11 @@ public class Task9 {
                     line += " " + numb;
                 }
             }
-            int indent=(lastLine.length() / 2 + line.length() / 2);
-            result += String.format("%" + indent + "s", line)+"\n";
+            int indent = (lastLine.length() / 2 + line.length() / 2);
+            if (lastLine.length() % 2 != 0) {
+                indent += 1;
+            }
+            result += String.format("%" + indent + "s", line) + "\n";
         }
 
         return result;
