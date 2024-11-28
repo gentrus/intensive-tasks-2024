@@ -57,10 +57,14 @@ public class Task11 {
                 continue;
             }
 
-            for (int j = 0; j < array.length;j++) {
-                result += array[j+i];
-            }
+            // с какого элемента стартовать
+            for (int j = 0; j <= array.length - i; j++) {
 
+                // сколько элементов прибавить
+                for (int k = j; k < i + j; k++) {
+                    result += array[k];
+                }
+            }
         }
 
         return result;
