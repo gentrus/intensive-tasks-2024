@@ -75,12 +75,9 @@ public class Task9 {
             line = "";
             for (int i = 0; i <= lineNumb; i++) {
                 long numb = getFactorial(lineNumb) / (getFactorial(i) * (getFactorial(lineNumb - i)));
-                if (i == 0) {
-                    line += numb;
-                } else {
-                    line += " " + numb;
-                }
+                line += i == 0 ? numb : " " + numb;
             }
+
             int indent = (lastLine.length() / 2 + line.length() / 2);
             if (lastLine.length() % 2 != 0) {
                 indent += 1;
@@ -98,6 +95,7 @@ public class Task9 {
         if (n == 1) {
             return 1;
         }
+
         return n * getFactorial(n - 1);
     }
 }
