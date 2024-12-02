@@ -40,11 +40,30 @@ package com.walking.intensive.chapter3.task12;
  */
 public class Task12 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
     }
 
     static int[] getMovementsNumber(String baskets) {
-        // Ваш код
-        return new int[]{};
+        String[] arr = baskets.split("");
+        for (String s : arr) {
+            if (s.equals("1") || s.equals("0")) {
+                continue;
+            }
+            return new int[]{};
+        }
+
+        int[] result = new int[arr.length];
+        for (int i = 0; i < result.length; i++) {
+            int counter = 0;
+            for (int j = 0; j < result.length; j++) {
+                if (arr[j].equals("1")) {
+                    counter += Math.abs(i - j);
+                }
+            }
+
+            result[i] = counter;
+        }
+
+        return result;
     }
 }
