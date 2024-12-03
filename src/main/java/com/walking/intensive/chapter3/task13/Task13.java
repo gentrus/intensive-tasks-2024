@@ -49,29 +49,42 @@ package com.walking.intensive.chapter3.task13;
  */
 public class Task13 {
     public static void main(String[] args) {
-        int[] arr = new int[]{2, 2, 3, 3};
-        System.out.println(getStepsCount(arr, 5));
+
     }
 
     static int getStepsCount(int[] plants, int wateringCanVolume) {
-        int stepCount = 0;
-        int waterAmt = wateringCanVolume;
+        if (checkData(plants, wateringCanVolume)) {
+            return -1;
+        }
+        if (plants.length == 0) {
+            return 0;
+        }
 
+        int stepCounter = 0;
+        int waterAmt = wateringCanVolume;
         for (int i = 0; i < plants.length; i++) {
-            stepCount++;
-            if (waterAmt == 0) {
-                stepCount += i * 2 + 1;
+            int waterLevel = plants[i];
+            while (waterAmt < waterLevel) {
+                waterLevel -= waterAmt;
+                stepCounter += i * 2;
                 waterAmt = wateringCanVolume;
-                continue;
             }
-            if (waterAmt < plants[i]) {
-                waterAmt = wateringCanVolume - plants[i] - waterAmt;
-                stepCount += (i+1) * 2 - 1;
-                continue;
-            }
+            stepCounter++;
             waterAmt -= plants[i];
         }
 
-        return stepCount;
+        return stepCounter;
+    }
+
+    static boolean checkData(int[] array, int a) {
+        for (int j : array) {
+            if (j < 1) {
+                return true;
+            }
+            if (a < 1) {
+                return true;
+            }
+        }
+        return false;
     }
 }
