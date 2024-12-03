@@ -43,11 +43,32 @@ package com.walking.intensive.chapter3.task14;
  */
 public class Task14 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        int[][] objectLocations1 = {
+                {1,3},
+                {3,3},
+                {5,3},
+                {2,2}
+        };
+        int[][] radars = {
+                {2,3,1},
+                {4,3,1},
+                {1,1,2}
+        };
     }
 
     static int[] getObjectCounts(int[][] objectLocations, int[][] radars) {
-        // Ваш код
+        int[][] radarRadii;
+        int objectDistance = 0;
+        for (int i = 0; i < objectLocations.length; i++) {
+            for (int j = 0; j <objectLocations[i].length; j++) {
+
+            }
+
+        }
+            }
+
+        }
+
         return new int[0];
     }
 }
