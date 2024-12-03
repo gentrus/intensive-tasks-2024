@@ -49,22 +49,29 @@ public class Task11 {
         if (array.length == 0) {
             return 0;
         }
+        if (checkArray(array)) {
+            return -1;
+        }
 
         int result = 0;
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] < 0) {
-                return -1;
-            }
-            if ((i + 1) % 2 == 0) {
-                continue;
-            }
+        for (int i = 0; i < array.length; ) {
             for (int j = 0; j < array.length - i; j++) {
                 for (int k = j; k <= i + j; k++) {
                     result += array[k];
                 }
             }
+            i += 2;
         }
 
         return result;
+    }
+
+    static boolean checkArray(int[] array) {
+        for (int j : array) {
+            if (j < 0) {
+                return true;
+            }
+        }
+        return false;
     }
 }
