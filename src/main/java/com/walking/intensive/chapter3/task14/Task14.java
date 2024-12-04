@@ -45,38 +45,57 @@ import java.util.Arrays;
  */
 public class Task14 {
     public static void main(String[] args) {
-        int[][] objectLocations = {
-                {1, 3},
-                {3, 3},
-                {5, 3},
-                {2, 2}
-        };
-        int[][] radars = {
-                {2, 3, 1},
-                {4, 3, 1},
-                {1, 1, 2}
-        };
-        System.out.println(Arrays.toString(getObjectCounts(objectLocations, radars)));
+
     }
 
     static int[] getObjectCounts(int[][] objectLocations, int[][] radars) {
-        int a = 0;
-        int b = 0;
-        double c = 0;
-        int counter=0;
-        int[] result1 = new int[radars[0].length];
-        int objectDistance = 0;
-        for (int i = 0; i < objectLocations[0].length; i++) {
-            a = Math.abs(radars[0][0] - objectLocations[i][0]);
-            b = Math.abs(radars[0][1] - objectLocations[1][i]);
-            c = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
-            if (c < radars[0][2]) {
-                result1[counter]++;
-                counter++;
+        if (isValidData(objectLocations, radars)) {
+            return new int[]{};
+        }
+
+        int a;
+        int b;
+        double distance;
+        int counter = 0;
+        int[] objectCounts = new int[radars.length];
+        for (int radarNumber = 0; radarNumber < radars.length; radarNumber++) {
+            for (int i = 0; i < objectLocations.length; i++) {
+                a = Math.abs(radars[radarNumber][0] - objectLocations[i][0]);
+                b = Math.abs(radars[radarNumber][1] - objectLocations[i][1]);
+                distance = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+
+                if (distance <= radars[radarNumber][2]) {
+                    objectCounts[counter]++;
+                }
+            }
+            counter++;
+        }
+
+        return objectCounts;
+    }
+
+    static boolean isValidData(int[][] objects, int[][] radars) {
+        for (int i = 0; i < objects.length; i++) {
+            for (int j = 0; j < objects[i].length; j++) {
+                if (objects[i][j] <= 0) {
+                    return true;
+                }
+                if (objects[i].length != 2) {
+                    return true;
+                }
+            }
+        }
+        for (int i = 0; i < radars.length; i++) {
+            for (int j = 0; j < radars[i].length; j++) {
+                if (radars[i][j] <= 0) {
+                    return true;
+                }
+                if (radars[i].length != 3) {
+                    return true;
+                }
             }
         }
 
-
-        return result1;
+        return false;
     }
 }
