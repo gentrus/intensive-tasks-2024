@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter3.task14;
 
+import java.util.Arrays;
+
 /**
  * Необходимо разработать программу, которая определяет количество объектов на радарах.
  *
@@ -32,7 +34,7 @@ package com.walking.intensive.chapter3.task14;
  * <ul>
  * <li>objectCounts[0] = 3, потому что радар с координатами (2;3) и радиусом действия 1 видит объекты с координатами
  * (1;3), (2;2) и (3;3). Всего 3 объекта.
- *</ul>
+ * </ul>
  *
  * <p>При наличии некорректных входных данных верните из метода пустой массив.
  *
@@ -43,32 +45,38 @@ package com.walking.intensive.chapter3.task14;
  */
 public class Task14 {
     public static void main(String[] args) {
-        int[][] objectLocations1 = {
-                {1,3},
-                {3,3},
-                {5,3},
-                {2,2}
+        int[][] objectLocations = {
+                {1, 3},
+                {3, 3},
+                {5, 3},
+                {2, 2}
         };
         int[][] radars = {
-                {2,3,1},
-                {4,3,1},
-                {1,1,2}
+                {2, 3, 1},
+                {4, 3, 1},
+                {1, 1, 2}
         };
+        System.out.println(Arrays.toString(getObjectCounts(objectLocations, radars)));
     }
 
     static int[] getObjectCounts(int[][] objectLocations, int[][] radars) {
-        int[][] radarRadii;
+        int a = 0;
+        int b = 0;
+        double c = 0;
+        int counter=0;
+        int[] result1 = new int[radars[0].length];
         int objectDistance = 0;
-        for (int i = 0; i < objectLocations.length; i++) {
-            for (int j = 0; j <objectLocations[i].length; j++) {
-
+        for (int i = 0; i < objectLocations[0].length; i++) {
+            a = Math.abs(radars[0][0] - objectLocations[i][0]);
+            b = Math.abs(radars[0][1] - objectLocations[1][i]);
+            c = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+            if (c < radars[0][2]) {
+                result1[counter]++;
+                counter++;
             }
-
-        }
-            }
-
         }
 
-        return new int[0];
+
+        return result1;
     }
 }
