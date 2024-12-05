@@ -40,11 +40,34 @@ package com.walking.intensive.chapter3.task15;
  */
 public class Task15 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        int[][] city = {
+                {2, 1, 3},
+                {5, 3, 2},
+                {3, 1, 4}
+        };
+        getMaxFloors(city);
+        // result 6
     }
 
     static int getMaxFloors(int[][] city) {
-        // Ваш код
+        int maxFloor = 0;
+        int maxFloor2 = 0;
+        int sumFloor = 0;
+        for (int i = 0; i < city.length; i++) {
+            for (int j = 0; j < city[i].length; j++) {
+                if (city[0][j] > maxFloor) {
+                    maxFloor = city[i][j];
+                }
+                if (city[i][0] > maxFloor) {
+                    maxFloor2 = city[i][0];
+                }
+                sumFloor = Math.min()
+            }
+
+        }
+        System.out.println(maxFloor);
+        int result = 0;
+
         return 0;
     }
 }
