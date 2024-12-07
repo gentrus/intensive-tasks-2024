@@ -1,7 +1,5 @@
 package com.walking.intensive.chapter3.task14;
 
-import java.util.Arrays;
-
 /**
  * Необходимо разработать программу, которая определяет количество объектов на радарах.
  *
@@ -49,22 +47,19 @@ public class Task14 {
     }
 
     static int[] getObjectCounts(int[][] objectLocations, int[][] radars) {
-        if (isValidData(objectLocations, radars)) {
+        if (validateInputData(objectLocations, 2) || (validateInputData(radars,3))) {
             return new int[]{};
         }
 
-        int a;
-        int b;
-        double distance;
         int counter = 0;
         int[] objectCounts = new int[radars.length];
         for (int radarNumber = 0; radarNumber < radars.length; radarNumber++) {
             for (int i = 0; i < objectLocations.length; i++) {
-                a = Math.abs(radars[radarNumber][0] - objectLocations[i][0]);
-                b = Math.abs(radars[radarNumber][1] - objectLocations[i][1]);
-                distance = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+                int side1 = Math.abs(radars[radarNumber][0] - objectLocations[i][0]);
+                int side2 = Math.abs(radars[radarNumber][1] - objectLocations[i][1]);
+                double hypotenuse = Math.sqrt(Math.pow(side1, 2) + Math.pow(side2, 2));
 
-                if (distance <= radars[radarNumber][2]) {
+                if (hypotenuse <= radars[radarNumber][2]) {
                     objectCounts[counter]++;
                 }
             }
@@ -74,23 +69,13 @@ public class Task14 {
         return objectCounts;
     }
 
-    static boolean isValidData(int[][] objects, int[][] radars) {
-        for (int i = 0; i < objects.length; i++) {
-            for (int j = 0; j < objects[i].length; j++) {
-                if (objects[i][j] <= 0) {
+    static boolean validateInputData(int[][] array, int a) {
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                if (array[i][j] <= 0) {
                     return true;
                 }
-                if (objects[i].length != 2) {
-                    return true;
-                }
-            }
-        }
-        for (int i = 0; i < radars.length; i++) {
-            for (int j = 0; j < radars[i].length; j++) {
-                if (radars[i][j] <= 0) {
-                    return true;
-                }
-                if (radars[i].length != 3) {
+                if (array[i].length != a) {
                     return true;
                 }
             }
