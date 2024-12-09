@@ -20,7 +20,9 @@ package com.walking.intensive.chapter4.task16;
  */
 public class Task16 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        int[] arr1 = new int[]{10, 11, 12, 10, 20, 30};
+        int value = 10;
+        System.out.println(getFirstIndex(arr1, value));
     }
 
     /**
@@ -29,7 +31,7 @@ public class Task16 {
      * В остальных случаях - false.
      */
     static boolean isEqualSize(int[] arr1, int[] arr2) {
-        return arr1 != null && arr2 != null && arr1.length == arr2.length;
+        return arr1.length != 0 && arr1.length == arr2.length;
     }
 
     /**
@@ -40,14 +42,15 @@ public class Task16 {
      * <p>Идентичными считаются массивы одинаковой длины, для которых arr1[i] == arr2[i] для любого i.
      */
     static boolean isEquals(int[] arr1, int[] arr2) {
+
         for (int i = 0; i < arr1.length; i++) {
-            if (arr1.length == arr2.length && arr1[i] == arr2[i]) {
-                return true;
+            if (arr1[i] != arr2[i]) {
+                return false;
             }
 
         }
 
-        return false;
+        return arr1.length == arr2.length;
     }
 
     /**
@@ -65,7 +68,7 @@ public class Task16 {
     static int[] incrementEach(int[] arr) {
         int[] arrPlus1 = new int[arr.length];
         for (int i = 0; i < arr.length; i++) {
-            arrPlus1[i] = arr[i]++;
+            arrPlus1[i] = arr[i] + 1;
         }
 
         return arrPlus1;
@@ -114,10 +117,19 @@ public class Task16 {
      * <p>Возвращаемое значение: [-2,-2,2]
      */
     static int[] subtractEach(int[] arr1, int[] arr2) {
-        if (arr1 == null && arr2 == null) {
+        if (arr1.length == 0 && arr2.length == 0) {
             return new int[]{};
         }
-        int[] result = new int[Math.max(arr1.length, arr2.length)];
+        int[] result = arr1.length > arr2.length ? arr1 : arr2;
+        if (arr1.length == 0) {
+            for (int i = 0; i < result.length; i++) {
+                result[i] = -result[i];
+            }
+            return result;
+        }
+        if (arr2.length == 0) {
+            return arr1;
+        }
         for (int i = 0; i < Math.min(arr1.length, arr2.length); i++) {
             result[i] = arr1[i] - arr2[i];
         }
@@ -164,16 +176,26 @@ public class Task16 {
      * <p>Возвращаемое значение: [1,2,456,3,4]
      */
     static int[] add(int[] arr, int index, int newValue) {
+        if (index < 0) {
+            return new int[]{};
+        }
         int[] result = new int[arr.length + 1];
         if (index > arr.length) {
-            result[arr.length] = newValue;
-        }
-        for (int i = 0; i < arr.length + 1; i++) {
-            if (i == index) {
-                result[i] = newValue;
-                i++;
+            for (int i = 0; i < arr.length; i++) {
+                result[i] = arr[i];
             }
+            result[arr.length] = newValue;
+            return result;
+        }
+        int i = 0;
+        while (i != index) {
             result[i] = arr[i];
+            i++;
+        }
+        result[i] = newValue;
+        i++;
+        for (; i < arr.length + 1; i++) {
+            result[i] = arr[i - 1];
         }
 
         return result;
@@ -216,7 +238,7 @@ public class Task16 {
      */
     static int getFirstIndex(int[] arr, int value) {
         for (int j : arr) {
-            if (j == value) {
+            if (arr[j] == value) {
                 return j;
             }
         }
@@ -276,11 +298,11 @@ public class Task16 {
         if (index > arr.length) {
             return new int[]{};
         }
-        int[] result = new int[arr.length - 1];
 
+        int[] result = new int[arr.length - 1];
         for (int i = 0; i < arr.length - 1; i++) {
             if (i == index) {
-                result[i] = arr[i+1];
+                result[i] = arr[i + 1];
                 i++;
             }
             result[i] = arr[i];
@@ -300,8 +322,25 @@ public class Task16 {
      * <p>Возвращаемое значение: [10,40,50,60]
      */
     static int[] removeAll(int[] arr, int... removingValues) {
-        // Ваш код
-        return null;
+        int counter = 0;
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < removingValues.length; j++) {
+                if (arr[i] == removingValues[j]) {
+                    counter++;
+                }
+            }
+        }
+        int[] result = new int[counter];
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < removingValues.length; j++) {
+                if (arr[i] == removingValues[i]) {
+                    result[i] = arr[i + 1];
+                    i++;
+                }
+                result[i] = arr[i];
+            }
+        }
+        return result;
     }
 
     /**
@@ -311,7 +350,27 @@ public class Task16 {
      * При этом индексы элементов могут не совпадать.
      */
     static boolean isSimilar(int[] arr1, int[] arr2) {
-        // Ваш код
+        int counter = 0;
+        for (int i = 0; i < arr1.length; i++) {
+            for (int j = 0; j < arr2.length; j++) {
+                if (arr1[i] == arr2[i]) {
+                    counter++;
+                }
+            }
+        }
+        if (counter == arr2.length) {
+            counter = 0;
+            for (int i = 0; i < arr2.length; i++) {
+                for (int j = 0; j < arr1.length; j++) {
+                    if (arr1[i] == arr2[i]) {
+                        counter++;
+                    }
+                }
+            }
+            if (counter == arr1.length) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -328,7 +387,11 @@ public class Task16 {
      * <p>Возвращаемое значение: [4,1,2,3]
      */
     static int[] shiftIndex(int[] arr) {
-        // Ваш код
-        return null;
+        int[] result = new int[arr.length];
+        result[0] = arr[arr.length - 1];
+        for (int i = 1; i < arr.length - 1; i++) {
+            result[i] = arr[i - 1];
+        }
+        return result;
     }
 }
