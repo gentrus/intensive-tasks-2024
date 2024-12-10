@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter4.task17;
 
+import java.util.Arrays;
+
 /**
  * Смауг, живущий в пещере с золотом, был заперт внутри горы.
  * Чтобы занять свое время, он развлекал себя следующей игрой.
@@ -21,7 +23,8 @@ package com.walking.intensive.chapter4.task17;
  */
 public class Task17 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        int[] arr = new int[]{4, 21, 5, 1, 51, 1};
+        System.out.println(Arrays.toString(sortByQuicksort(arr)));
     }
 
     /**
@@ -40,9 +43,26 @@ public class Task17 {
      * </ol>
      */
     static int[] sortByBubble(int[] array) {
-        // Ваш код
-        return new int[]{};
+        if (array == null || array.length == 0) {
+            return new int[]{};
+        }
+
+        int[] result = array;
+        int minusLenght = 1;
+        for (int i = 0; i < result.length; i++) {
+            for (int j = 0; j < result.length - minusLenght; j++) {
+                if (result[j] > result[j + 1]) {
+                    int num = result[j + 1];
+                    result[j + 1] = result[j];
+                    result[j] = num;
+                }
+            }
+            minusLenght++;
+        }
+
+        return result;
     }
+
     /**
      * Быстрая сортировка, она же QuickSort:
      *
@@ -84,8 +104,57 @@ public class Task17 {
      * </ol>
      */
     static int[] sortByQuicksort(int[] array) {
-        // Ваш код
-        return new int[]{};
+        if (array.length == 2) {
+            if (array[0] > array[1]) {
+                int b = array[0];
+                array[0] = array[1];
+                array[1] = b;
+            }
+            return array;
+        }
+        if (array.length < 2) {
+            return array;
+        }
+        int[] result = array;
+        int min = result[0];
+        int max = result[0];
+        for (int i = 0; i < result.length; i++) {
+            min = Math.min(result[i], min);
+            max = Math.max(result[i], max);
+        }
+        int supportElement = (min + max) / 2;
+        int i = 0;
+        int j = result.length - 1;
+        while (i <= j) {
+            if (result[i] >= supportElement) {
+                if (result[j] <= supportElement) {
+                    int a = result[i];
+                    result[i] = result[j];
+                    result[j] = a;
+                } else {
+                    i--;
+                    j--;
+                }
+            }
+            i++;
+        }
+        int[] arr1 = new int[i];
+        int[] arr2 = new int[result.length - i];
+        for (int k = 0; k < arr1.length; k++) {
+            arr1[k] = result[k];
+        }
+        for (int k = i; k < arr2.length + i; k++) {
+            arr2[k - i] = result[k];
+        }
+        sortByQuicksort(arr1);
+        sortByQuicksort(arr2);
+        for (int k = 0; k < arr1.length; k++) {
+            result[k] = arr1[k];
+        }
+        for (int k = i; k < arr2.length + i; k++) {
+            result[k] = arr2[k - i];
+        }
+        return result;
     }
 
     /**
