@@ -1,6 +1,7 @@
 package com.walking.intensive.chapter4.task17;
 
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * Смауг, живущий в пещере с золотом, был заперт внутри горы.
@@ -23,8 +24,9 @@ import java.util.Arrays;
  */
 public class Task17 {
     public static void main(String[] args) {
-        int[] arr = new int[]{4, 21, 5, 1, 51, 1};
-        System.out.println(Arrays.toString(sortByQuicksort(arr)));
+
+        getBenchmarkOn1000();
+        getBenchmarkOn10000();
     }
 
     /**
@@ -115,12 +117,16 @@ public class Task17 {
         if (array.length < 2) {
             return array;
         }
+
         int[] result = array;
         int min = result[0];
         int max = result[0];
         for (int i = 0; i < result.length; i++) {
             min = Math.min(result[i], min);
             max = Math.max(result[i], max);
+        }
+        if (min == max) {
+            return array;
         }
         int supportElement = (min + max) / 2;
         int i = 0;
@@ -166,7 +172,7 @@ public class Task17 {
      * Время выполнения - разность времени после работы алгоритма и времени до работы алгоритма
      */
     static long getBenchmarkOn1000() {
-        // Ваш код
+        getTime(1000);
         return 0;
     }
 
@@ -174,7 +180,27 @@ public class Task17 {
      * Повторите предыдущие вычисления из метода getBenchmarkOn1000() для массива в 10 000 элементов.
      */
     static long getBenchmarkOn10000() {
-        // Ваш код
+        getTime(10000);
+        return 0;
+    }
+
+    static long getTime(int elementsNumb) {
+        int[] arr = new int[elementsNumb];
+        Random random = new Random();
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = random.nextInt(elementsNumb);
+        }
+
+        long startTime = System.currentTimeMillis();
+        sortByBubble(arr);
+        long endTime = System.currentTimeMillis();
+        System.out.println(elementsNumb + " Bubble: " + (endTime - startTime) + " ms");
+
+        startTime = System.currentTimeMillis();
+        sortByQuicksort(arr);
+        endTime = System.currentTimeMillis();
+        System.out.println(elementsNumb + " Quick: " + (endTime - startTime) + " ms");
+
         return 0;
     }
 }
