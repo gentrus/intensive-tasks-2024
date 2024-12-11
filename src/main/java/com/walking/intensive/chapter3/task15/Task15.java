@@ -44,40 +44,50 @@ public class Task15 {
     }
 
     static int getMaxFloors(int[][] city) {
-        if (validateInputData(city)) {
+        if (!isValidInputData(city)) {
             return -1;
         }
 
-        int sumBuildFloors = 0;
+        int[] maxFloorHorizontal = new int[city.length];
+        int[] maxFloorVertical = new int[city.length];
         for (int i = 0; i < city.length; i++) {
+            maxFloorHorizontal[i] = city[i][0];
+            maxFloorVertical[i] = city[0][i];
+
             for (int j = 0; j < city[i].length; j++) {
-                int maxFloorHorizontal = city[i][j];
-                for (int k = 0; k < city[i].length; k++) {
-                    maxFloorHorizontal = Math.max(maxFloorHorizontal, city[i][k]);
+                if (maxFloorHorizontal[i] < city[i][j]) {
+                    maxFloorHorizontal[i] = city[i][j];
                 }
-                int maxFloorVertical = city[i][j];
-                for (int k = 0; k < city.length; k++) {
-                    maxFloorVertical = Math.max(maxFloorVertical, city[k][j]);
+            }
+            for (int j = 0; j < city.length; j++) {
+                if (maxFloorVertical[i] < city[j][i]) {
+                    maxFloorVertical[i] = city[j][i];
                 }
-                sumBuildFloors += Math.min(maxFloorHorizontal, maxFloorVertical) - city[i][j];
             }
         }
 
-        return sumBuildFloors;
+        int sumBuiltFloors = 0;
+        for (int i = 0; i < city.length; i++) {
+            for (int j = 0; j < city[i].length; j++) {
+                sumBuiltFloors += Math.min(maxFloorHorizontal[i], maxFloorVertical[j]) - city[i][j];
+            }
+        }
+
+        return sumBuiltFloors;
     }
 
-    static boolean validateInputData(int[][] array) {
+    static boolean isValidInputData(int[][] array) {
         if (array.length == 0 || array.length != array[0].length) {
-            return true;
+            return false;
         }
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
                 if (array[i][j] < 0 || array[i].length != array.length) {
-                    return true;
+                    return false;
                 }
             }
         }
 
-        return false;
+        return true;
     }
 }
