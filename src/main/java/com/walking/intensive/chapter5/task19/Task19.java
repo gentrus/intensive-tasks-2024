@@ -17,7 +17,8 @@ package com.walking.intensive.chapter5.task19;
  */
 public class Task19 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        Parallelepiped parallelepiped = new Parallelepiped(3,3,3,10,10,10);
+
     }
 
     static boolean isIntersected(Sphere sphere, Parallelepiped parallelepiped) {
