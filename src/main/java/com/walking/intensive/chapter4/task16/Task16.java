@@ -46,6 +46,7 @@ public class Task16 {
                     return false;
                 }
             }
+            return true;
         }
 
         return false;
