@@ -40,13 +40,15 @@ public class Task16 {
      * <p>Идентичными считаются массивы одинаковой длины, для которых arr1[i] == arr2[i] для любого i.
      */
     static boolean isEquals(int[] arr1, int[] arr2) {
-        for (int i = 0; i < arr1.length; i++) {
-            if (arr1[i] != arr2[i]) {
-                return false;
+        if (arr1.length == arr2.length) {
+            for (int i = 0; i < arr1.length; i++) {
+                if (arr1[i] != arr2[i]) {
+                    return false;
+                }
             }
         }
 
-        return arr1.length == arr2.length;
+        return false;
     }
 
     /**
@@ -122,11 +124,14 @@ public class Task16 {
             for (int i = 0; i < result.length; i++) {
                 result[i] = -result[i];
             }
+
             return result;
         }
+
         if (arr2.length == 0) {
             return arr1;
         }
+
         for (int i = 0; i < Math.min(arr1.length, arr2.length); i++) {
             result[i] = arr1[i] - arr2[i];
         }
@@ -183,14 +188,17 @@ public class Task16 {
             for (int i = 0; i < arr.length; i++) {
                 result[i] = arr[i];
             }
+
             result[arr.length] = newValue;
             return result;
         }
+
         int i = 0;
         while (i != index) {
             result[i] = arr[i];
             i++;
         }
+
         result[i] = newValue;
         i++;
         for (; i < arr.length + 1; i++) {
@@ -206,8 +214,8 @@ public class Task16 {
      * В остальных случаях - false.
      */
     static boolean isContains(int[] arr, int value) {
-        for (int j : arr) {
-            if (j == value) {
+        for (int i : arr) {
+            if (i == value) {
                 return true;
             }
         }
@@ -266,16 +274,13 @@ public class Task16 {
      * </ul>
      */
     static int getLastIndex(int[] arr, int value) {
-        int counter = 0;
-        int result = 0;
-        for (int i = 0; i < arr.length; i++) {
+        int result = -1;
+
+        for (int i = arr.length-1; i >= 0; i--) {
             if (arr[i] == value) {
                 result = i;
-                counter++;
+                break;
             }
-        }
-        if (counter == 0) {
-            return -1;
         }
 
         return result;
@@ -297,8 +302,10 @@ public class Task16 {
         if (index < 0) {
             return new int[]{};
         }
+
         if (index > arr.length) {
-            return arr;
+            int[] result = arr;
+            return result;
         }
 
         int[] result = new int[arr.length - 1];
@@ -307,6 +314,7 @@ public class Task16 {
             if (i == index) {
                 plus++;
             }
+
             result[i] = arr[i + plus];
         }
 
@@ -331,11 +339,13 @@ public class Task16 {
                     result = removeByIndex(result, i);
                     j--;
                 }
+
                 if (i == result.length) {
                     return result;
                 }
             }
         }
+
         return result;
     }
 
@@ -351,6 +361,7 @@ public class Task16 {
                 return false;
             }
         }
+
         for (int i = 0; i < arr2.length; i++) {
             if (!isContains(arr1, arr2[i])) {
                 return false;
@@ -382,6 +393,7 @@ public class Task16 {
         for (int i = 1; i < arr.length; i++) {
             result[i] = arr[i - 1];
         }
+
         return result;
     }
 }
